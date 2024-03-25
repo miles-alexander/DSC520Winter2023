@@ -1,0 +1,546 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Final Project Steps 1 \& 2},
+  pdfauthor={Miles Peña},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Final Project Steps 1 \& 2}
+\author{Miles Peña}
+\date{2024-02-10}
+
+\begin{document}
+\maketitle
+
+\section{Step 1:}\label{step-1}
+
+\subsection{Introduction:}\label{introduction}
+
+Throughout the years, the United States of America has seen an increase
+in violence through mass shootings. Since the Sandy Hook Elementary
+School shooting, we have seen the numbers nearly triple in size. While,
+yes, the country should look at better gun control policies to solve
+this issue, as data scientists we can look at the data that we have
+collected from these shootings over the past 10 years to try to prevent
+these from happening in the future. We can look at different factors
+such as demographics, socioeconomic status, and the effect that mental
+illness can have on these shootings. This is important for individuals
+to be interested in because it is something that can potentially help
+reduce the number of shootings or hopefully eradicate them completely at
+some point in the future. With the amount of data that has been compiled
+since this great increase 10 years ago, it can now be a problem
+addressed through the help of data science.
+
+\subsection{Research Questions:}\label{research-questions}
+
+1.~~~~ What is the choice of weapon for these shootings?
+
+2.~~~~ Do the shooters have a criminal background or are they first time
+offenders?
+
+3.~~~~ Which gender is more prone to commit this type of crime?
+
+4.~~~~ Where do most shootings take place? What is the most frequent
+place?
+
+5.~~~~ Does race play a role in mass shootings?
+
+6.~~~~ Does mental illness play a role in mass shootings?
+
+\subsection{Approach:}\label{approach}
+
+This approach will not fully address the problem but rather will serve
+as a means of attempting to predict criminal behavior based on past
+experiences. By gathering and compiling the data of previous mass
+shootings, we will aim to create a guide of what to look for or what to
+flag as suspicious activity. This will assist with helping to provide
+enough police presence in areas that are more prone to attacks. It will
+help create a log for legally obtained weapons and who purchased them in
+order to better track these. The biggest thing this approach will aim to
+accomplish is determine the correlation (or lack thereof) between mass
+shootings and individuals with mental illness in order to persuade and
+implement a program of mental health evaluation prior to firearm sales.
+
+\subsection{Data:}\label{data}
+
+1.~~~~
+\url{https://www.kaggle.com/datasets/zusmani/us-mass-shootings-last-50-years}
+
+This dataset looks at mass shooting attacks in the United States of
+America between 1966 and 2017. The dataset contains Serial No, Title,
+Location, Date, Summary, Fatalities, Injured, Total Victims, Mental
+Health Issue, Race, Gender, and Latitude and Longitude information. The
+data set was posted to Kaggle in 2022 and has been modified multiple
+times to add new variables, add new data, and add missing data in order
+to help create visualizations and extract patterns. Similar to my
+project, the data set aims to aid in predictions for future events and
+prevention of such.
+
+2.~~~~ \url{https://www.kaggle.com/datasets/carlosparadis/stanford-msa}
+
+This dataset attempts to facilitate research on gun violence in the US
+by making raw data more accessible. This dataset is comparable to the
+previous one except it has a bit more detail in the mental illness
+variable which can be very useful with the project.
+
+3.~~~~
+\url{https://www.kaggle.com/datasets/twinkle0705/mental-health-and-suicide-rates}
+
+The goal of using this dataset is to determine if a correlation exists
+between mental health and suicide rates. The majority of mass shootings
+end with the perpetrator being shot down by the police. Because of this,
+it stands to reason that mass shooters go into the situation not
+expecting to come out alive (i.e.~go in as a suicide attempt while
+taking people out with them). This dataset compares countries, their
+resources for mental health, their mental health facilities as well as
+their suicide rates.
+
+\subsection{Required Packages:}\label{required-packages}
+
+From what I know so far, the packages required to load and compare these
+datasets are as follows:
+
+library(ggplot2)
+
+library(dplyr)
+
+library(readr)
+
+library(tidyr)
+
+library(stringr)
+
+library(reshape2)
+
+library(ggthemes)
+
+library(lattice)
+
+library(knitr)
+
+\subsection{Plots and Table Needs:}\label{plots-and-table-needs}
+
+Scatterplots, histograms, and boxplots. I would also like to incorporate
+a map graph to depict the rates per state and an area chart to show the
+change over time of mass shootings. As far as tables go, I would like to
+use the simple XY table as well as column tables and grouped table to go
+a bit more in depth for comparison purposes. A multiple variables table
+might also prove to be beneficial for displaying data and making it
+easier to understand for the reader.
+
+\subsection{Questions for Future
+Steps:}\label{questions-for-future-steps}
+
+The main thing that I do not right now that I will need in order to
+analyze and interpret the data is how to create the correct tables and
+plots as described above. I am sure that there will need to be other
+things to learn but right now, I do not know that that is. For the most
+part, I feel confident in the datasets I have collected as well as with
+the learnings we have covered so far to be able to compare the datasets
+and come to a conclusion that could possibly assist with predicting the
+who, what, where, how, and why of mass shootings in the United States.
+
+\section{Step 2:}\label{step-2}
+
+\subsection{How did you import and clean your
+data?}\label{how-did-you-import-and-clean-your-data}
+
+Data cleaning involves handling missing values, outliers, and incorrect
+data. Missing values can be handled by either dropping the rows/columns
+with missing values. For my dataset, I used na.omit() in order to remove
+any empty cells that would not give accurate information for the study.
+I also cleaned up and corrected the date format on all of the entries as
+they were not all the same.
+
+\subsection{What does the final data set look
+like?}\label{what-does-the-final-data-set-look-like}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{setwd}\NormalTok{(}\StringTok{"/Users/milespena/Documents/R"}\NormalTok{)}
+\NormalTok{shootingData }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"shooting{-}1982{-}2023.csv"}\NormalTok{)}
+\NormalTok{shootingData.No.NA }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(shootingData)}
+\FunctionTok{summary}\NormalTok{(shootingData.No.NA)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    ï..case            location             date             summary         
+##  Length:80          Length:80          Length:80          Length:80         
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##    fatalities      injured          total_victims       location.1       
+##  Min.   : 3.00   Length:80          Length:80          Length:80         
+##  1st Qu.: 5.00   Class :character   Class :character   Class :character  
+##  Median : 6.00   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   : 9.25                                                           
+##  3rd Qu.: 9.00                                                           
+##  Max.   :58.00                                                           
+##  age_of_shooter  prior_signs_mental_health_issues mental_health_details
+##  Min.   :11.00   Length:80                        Length:80            
+##  1st Qu.:25.00   Class :character                 Class :character     
+##  Median :34.00   Mode  :character                 Mode  :character     
+##  Mean   :34.11                                                         
+##  3rd Qu.:42.00                                                         
+##  Max.   :66.00                                                         
+##  weapons_obtained_legally where_obtained     weapon_type       
+##  Length:80                Length:80          Length:80         
+##  Class :character         Class :character   Class :character  
+##  Mode  :character         Mode  :character   Mode  :character  
+##                                                                
+##                                                                
+##                                                                
+##  weapon_details         race              gender             latitude    
+##  Length:80          Length:80          Length:80          Min.   :21.32  
+##  Class :character   Class :character   Class :character   1st Qu.:33.40  
+##  Mode  :character   Mode  :character   Mode  :character   Median :37.80  
+##                                                           Mean   :37.22  
+##                                                           3rd Qu.:41.71  
+##                                                           Max.   :48.05  
+##    longitude           type                year     
+##  Min.   :-157.88   Length:80          Min.   :1982  
+##  1st Qu.:-117.10   Class :character   1st Qu.:1996  
+##  Median : -92.42   Mode  :character   Median :2006  
+##  Mean   : -97.29                      Mean   :2004  
+##  3rd Qu.: -82.36                      3rd Qu.:2012  
+##  Max.   : -71.08                      Max.   :2018
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(shootingData.No.NA)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                          ï..case                  location
+## 40                   Fifth Third Center shooting          Cincinnati, Ohio
+## 43                         Waffle House shooting      Nashville, Tennessee
+## 45 Marjory Stoneman Douglas High School shooting         Parkland, Florida
+## 48           Texas First Baptist Church massacre Sutherland Springs, Texas
+## 51                      Las Vegas Strip massacre         Las Vegas, Nevada
+## 52                    San Francisco UPS shooting San Francisco, California
+##         date
+## 40  9/6/1918
+## 43 4/22/1918
+## 45 2/14/1918
+## 48 11/5/1917
+## 51 10/1/1917
+## 52 6/14/1917
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 summary
+## 40                                                                                                                                                                                                                                                                                                                                                                                                                                                           Omar Enrique Santa Perez, 29, walked into the ground-floor lobby of a building in downtown Cincinnati shortly after 9 a.m. and opened fire. Within minutes, Perez was fatally wounded in a shootout with law enforcement officers responding to the scene.
+## 43 Travis Reinking, 29, opened fire around 3:30 a.m. in the parking lot of a Waffle House in Antioch, and continued shooting as he entered the restaurant. As he attempted to reload his AR-15, a bystander heroically wrestled the rifle away from Reinking, who then fled; he was captured by authorities the following day. Reinking had a history of erratic behavior and run-ins with law enforcement in his home state of Illinois, including claims that he was being stalked and harassed by pop star Taylor Swift. In July 2017, he was arrested at the White House after breaching security in an effort to speak with President Trump, reportedly claiming his right to do so as â€œa sovereign citizen.â€ 
+## 45                                                                                                                                                                                                                                                                                                                                                                               Nikolas J. Cruz, 19, heavily armed with an AR-15, tactical gear, and â€œcountless magazinesâ€ of ammo, according to the Broward County Sheriff, attacked the high school as classes were ending for the day, killing at least 17 people and injuring many others. He was apprehended by authorities shortly after fleeing the campus.
+## 48                                                                                                                                                                                                                                                                                                                    Devin Patrick Kelley, a 26-year-old ex-US Air Force airman, opened fire at the First Baptist Church in Sutherland Springs during Sunday morning services, killing at least 26 people and wounding and injuring 20 others. He left the church and fled in his vehicle after engaging in a gunfight with a local citizen; he soon crashed his vehicle and died from a self-inflicted gunshot wound.
+## 51                                                                                                                                                                                                                                         Stephen Craig Paddock, 64, fired a barrage of rapid gunfireâ€”using semiautomatic rifles modified with "bump stocks"â€”at thousands of concertgoers on the Las Vegas Strip late on a Sunday night; Paddock had positioned himself in a corner suite on the 32nd floor of the Mandalay Bay Resort and Casino, where he took aim from windows he'd smashed open. Police responding to the attack found Paddock inside the hotel suite, deceased from a self-inflicted gunshot.
+## 52                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Jimmy Lam, 38, fatally shot three coworkers and wounded two others inside a UPS facility in San Francisco. Lam killed himself as law enforcement officers responded to the scene.
+##    fatalities injured total_victims location.1 age_of_shooter
+## 40          3       2             5  Workplace             29
+## 43          4       4             8      Other             29
+## 45         17      17            34     School             19
+## 48         26      20            46  Religious             26
+## 51         58     546           604      Other             64
+## 52          3       2             5  Workplace             38
+##    prior_signs_mental_health_issues
+## 40                              Yes
+## 43                              Yes
+## 45                              Yes
+## 48                              Yes
+## 51                              TBD
+## 52                              Yes
+##                                                                                                                                                                                                                                                                                                                                                                      mental_health_details
+## 40                                                                                                                                                                         Perez filed a "delusional" lawsuit in 2017 against CNBC and TD Ameritrade; the federal judge who threw out the case said Perez's allegations were "rambling, difficult to decpipher and borders on delusional."
+## 43 Reinking had a history of erratic behavior and run-ins with law enforcement in his home state of Illinois, including claims that he was being stalked and harassed by pop star Taylor Swift. In July 2017, he was arrested at the White House after breaching security in an effort to speak with President Trump, reportedly claiming his right to do so as â€œa sovereign citizen.â€
+## 45                                                                                                                                                                                                                                                                                             Cruz had a long history of behavioral problems and had spent time in mental health clinics.
+## 48                                                             Kelley had a history of domestic violence, including a court martial and conviction stemming from assaulting his wife and child; he also had a history of cruelty to animals and of stalking and harassing ex-girlfriends, including an underage girl. He reportedly briefly escaped from a mental health facility in 2012.
+## 51                                                                                                                                                                                        Perpetrator's history unclear. In 1969 Paddock's father was classified by the FBI as a dangerous psychopath with suicidal tendencies; psychopathy can be heritable (see Mother Jones sourcing). 
+## 52                                                                                                                                                                                                                                                                                                                                            Lam had a history of domestic, work conflict
+##                                                                                                               weapons_obtained_legally
+## 40                                                                                                                                 Yes
+## 43                                                                                                                                 Yes
+## 45                                                                                                                                 Yes
+## 48 Kelley passed federal criminal background checks; the US Air Force failed to provide information on his criminal history to the FBI
+## 51                                                                                                                                 Yes
+## 52                                                                                                                                  No
+##                                                                                               where_obtained
+## 40                                                                                         A local gun store
+## 43                                                                                             Family member
+## 45                                                                                       A Florida pawn shop
+## 48                            Purchased in April 2016 from an Academy Sports & Outdoors store in San Antonio
+## 51                                                                                   Two gun shops in Nevada
+## 52 Unclear; the firearm was stolen in Utah. A second handgun Lam had (also stolen) was unused in the attack.
+##                                                                                                                 weapon_type
+## 40                                                                                                    semiautomatic handgun
+## 43                                                                                                      semiautomatic rifle
+## 45                                                                                                      semiautomatic rifle
+## 48                                                                                                      semiautomatic rifle
+## 51 23 firearms, mostly rifles; including scopes, and two modified for "fully automatic" firing; two were mounted on tripods
+## 52                                                                                                             two handguns
+##                                                                                                                                             weapon_details
+## 40                                                                                                                                             9mm handgun
+## 43                                                                                                                                                   AR-15
+## 45                                                                                                                                                   AR-15
+## 48                                                                                              Ruger AR-556; Kelley also possessed semiautomatic handguns
+## 51 AR-15-style and AK-47-style rifles and "a large cache of ammunition"; four Daniel Defense DDM4 rifles, three FN-15s and other rifles made by Sig Sauer.
+## 52                                                                  MAC-10-style â€œassault pistolâ€; 30-round magazine. An additional box of ammunition.
+##      race gender latitude  longitude type year
+## 40 Latino      M 39.10198  -84.51178 Mass 2018
+## 43  White      M 36.05252  -86.61694 Mass 2018
+## 45  White      M 26.30483  -80.26951 Mass 2018
+## 48  White      M 29.27328  -98.05649 Mass 2017
+## 51  White      M 36.09574 -115.17154 Mass 2017
+## 52  Asian      M 37.76595 -122.40609 Mass 2017
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tail}\NormalTok{(shootingData.No.NA)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                   ï..case               location      date
+## 136                          ESL shooting  Sunnyvale, California 2/16/1988
+## 137       Shopping centers spree killings      Palm Bay, Florida 4/23/1987
+## 138 United States Postal Service shooting       Edmond, Oklahoma 8/20/1986
+## 139        San Ysidro McDonald's massacre San Ysidro, California 7/18/1984
+## 140             Dallas nightclub shooting          Dallas, Texas 6/29/1984
+## 141                 Welding shop shooting         Miami, Florida 8/20/1982
+##                                                                                                                                                                                                                                                                                                                                                                                          summary
+## 136                                                                                                                                            Former ESL Incorporated employee Richard Farley, 39, gunned down seven people at his former workplace, after stalking and harassing a coworker he was romantically interested in. He was later arrested and now sits on death row at San Quentin.
+## 137 Retired librarian William Cruse, 59, was paranoid neighbors gossiped that he was gay. He drove to a Publix supermarket, killing two Florida Tech students en route before opening fire outside and killing a woman. He then drove to a Winn-Dixie supermarket and killed three more, including two police officers. Cruse was arrested after taking a hostage and died on death row in 2009.
+## 138                                                                                                                                                                                                                                                                                                  Postal worker Patrick Sherrill, 44, opened fire at a post office before committing suicide.
+## 139                                                                                                                                                                                                                                                                                James Oliver Huberty, 41, opened fire in a McDonald's restaurant before he was shot dead by a police officer.
+## 140                                                                                                                                                                                                                                                                     Abdelkrim Belachheb, 39, opened fire at an upscale nightclub after a woman rejected his advances. He was later arrested.
+## 141                                                                                                                                                                                                                                               Junior high school teacher Carl Robert Brown, 51, opened fire inside a welding shop and was later shot dead by a witness as he fled the scene.
+##     fatalities injured total_victims location.1 age_of_shooter
+## 136          7       4            11  Workplace             39
+## 137          6      14            20      Other             59
+## 138         15       6            21  Workplace             44
+## 139         22      19            41      Other             41
+## 140          6       1             7      Other             39
+## 141          8       3            11      Other             51
+##     prior_signs_mental_health_issues
+## 136                              Yes
+## 137                              Yes
+## 138                         Unclear 
+## 139                              Yes
+## 140                              Yes
+## 141                              Yes
+##                                                                                                                                                                                                                   mental_health_details
+## 136 He stalked and harassed his colleague Laura Black for four years until she was granted a temporary restraining order aginst him. Before he was fired for his bizarre behavior, he was ordered to undergo psychological counseling. 
+## 137                                                                                                                                  He suffered from paranoid delusions. A judge found that he suffered from "extreme mental illness."
+## 138                                                    He was worried he had inherited mental problems and rebuffed a pastor's suggestion he seek psychiatric counseling. His family members denied he had a history of mental illness.
+## 139                                                                                                                                            The day before the shooting, he tried to make an appointment at a mental health clinic. 
+## 140                                                                                                                 During his last meal with his wife, he confessed he was depressed and had visited psychiatric hospitals in Belgium.
+## 141                                                                       His second wife left him because he refused to seek psychological help. He had become increasingly isolated. One former student said he was "off his rocker."
+##     weapons_obtained_legally
+## 136                      Yes
+## 137                      Yes
+## 138                      Yes
+## 139                      Yes
+## 140                       No
+## 141                      Yes
+##                                                                         where_obtained
+## 136                       Various sporting goods and gun stores in Northern California
+## 137               Gun store in Norwood, Ohio; The Oaks Trading Post in Melbourne, Fla.
+## 138 Issued by Oklahoma National Guard, where Sherrill served, for target competition  
+## 139                                                                            Unknown
+## 140                                         Hines Boulevard Pawn Shop in Dallas, Texas
+## 141                                                 Garcia Gun Center in Hialeah, Fla.
+##                                                            weapon_type
+## 136 Two semiautomatic handguns, one rifle, two revolvers, two shotguns
+## 137                               One rifle, one revolver, one shotgun
+## 138                                       Three semiautomatic handguns
+## 139        One semiautomatic handgun, one rifle (assault), one shotgun
+## 140                                          One semiautomatic handgun
+## 141                                                        One shotgun
+##                                                                                                                                                                                                                                    weapon_details
+## 136 .380 ACP Browning, 9mm Smith & Wesson semiautomatic handguns; Ruger M-77 .22-250 bolt-action rifle with scope; Mossberg 12-gauge pump-action, 12-gauge Benelli semiautomatic shotguns; .357 Magnum Smith & Wesson, .22 Sentinel WMR revolvers
+## 137                                                                                                                              Sturm, Ruger Mini-14 semiautomatic rifle; 20-gauge Winchester pump-action shotgun; .357 Ruger Blackhawk revolver
+## 138                                                                                                                                                                        .22-caliber, two .45-caliber Colt Model 1911-A1 semiautomatic handguns
+## 139                                                                        9mm Browning P35 Hi-Power semiautomatic handgun; 9mm Israeli Military Industries Uzi Model A carbine semiautomatic rifle; 12-gauge Winchester 1200 pump-action shotgun
+## 140                                                                                                                                                                                                  9mm Smith & Wesson 459 semiautomatic handgun
+## 141                                                                                                                                                                                   Mossberg 500 Persuader pump-action shotgun with pistol grip
+##      race gender latitude  longitude  type year
+## 136 white   Male 37.36883 -122.03635  Mass 1988
+## 137 white   Male 28.03319  -80.64297 Spree 1987
+## 138 white   Male 35.66720  -97.42937  Mass 1986
+## 139 white   Male 32.55200 -117.04308  Mass 1984
+## 140 white   Male 32.92517  -96.83868  Mass 1984
+## 141 white   Male 25.79649  -80.22668  Mass 1982
+\end{verbatim}
+
+\subsection{What information is not
+self-evident?}\label{what-information-is-not-self-evident}
+
+The information that is not self-evident will be the relationship
+between the variables. In order to uncover new information in the data,
+I plan to perform exploratory data analysis (EDA) involving visualizing
+the data using plots, finding correlations, and identifying patterns and
+trends in the data. There are also two questions for which I may need to
+do my own research for and add columns to represent this such as
+previous criminal history as well as generalized location of where they
+shooting took place.
+
+\subsection{What are different ways you could look at this
+data?}\label{what-are-different-ways-you-could-look-at-this-data}
+
+By performing descriptive statistics to get a sense of the distribution
+of each variable, or by creating visualizations like histograms or
+scatter plots to understand the relationships between variables.
+
+\subsection{How do you plan to slice and dice the
+data?}\label{how-do-you-plan-to-slice-and-dice-the-data}
+
+I plan to explore the data by grouping it based on variables or possibly
+filtering to focus on a subset. The groupby() function that we used
+previously I feel may come in handy for this assignment. It is important
+to look at the data for each variable as each variable will play a key
+role in answering the questions of this study.
+
+\subsection{How could you summarize your data to answer key
+questions?}\label{how-could-you-summarize-your-data-to-answer-key-questions}
+
+In order to summarize the data, I plan on calculating measures of
+central tendency like the mean, median and mode as well as measures of
+dispersion like the standard deviation or interquartile range.
+
+\subsection{What types of plots and tables will help you to illustrate
+the findings to your
+questions?}\label{what-types-of-plots-and-tables-will-help-you-to-illustrate-the-findings-to-your-questions}
+
+I will use bar graphs, box plots, histograms, line graphs and scatter
+plots to illustrate my findings. I am still unsure of which
+visualization will work best for the dataset and the data manipulation I
+perform but I intend to experiement until I find whatever best explains
+the point I am trying to get accross. Correlation matrices will also aid
+in demonstrating relationships between variables.
+
+\subsection{Do you plan on incorporating any machine learning techniques
+to answer your research questions?
+Explain.}\label{do-you-plan-on-incorporating-any-machine-learning-techniques-to-answer-your-research-questions-explain.}
+
+Since my research questions involve finding patterns in the data, I will
+be incorporating machine learning techniques to answer these. I again I
+am unsure if this will work or help with what I am trying to do but I
+aim to use regression models for now and depending on research and knew
+knowledge within the course, I may incorporate other techniques as well.
+
+\subsection{What questions do you have now, that will lead to further
+analysis or additional
+steps?}\label{what-questions-do-you-have-now-that-will-lead-to-further-analysis-or-additional-steps}
+
+The questions that I have at this point are mostly pertaining to which
+of the methods, techniques, and/or concepts that we have covered thus
+far could work for this project. For all previous assignments, we have
+been given the data and what to do with it so now having to determine
+which to use is overwhelming. As far as the data goes, my questions are
+solely in relation to the correlation of variables as well as attempting
+to find the appropriate answers to the questions I presented in part 1.
+
+\end{document}

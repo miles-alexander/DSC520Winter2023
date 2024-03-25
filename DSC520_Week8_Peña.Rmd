@@ -1,0 +1,202 @@
+---
+title: "Week 8"
+author: "Miles Peña"
+date: "2024-02-06"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# *Week 8 Exercise*
+
+## Complete the Following:
+
+### 1. Explain any transformations or modifications you made to the dataset.
+
+```{r}
+
+setwd("/Users/milespena/Documents/R")
+library(readxl) 
+housing_data <- read_excel("Housing.xlsx") 
+
+```
+
+In order to make the data easier to read, I changed the column names from abbreviations to full words and used an underscore instead of a space to separate words to make it easier to work with. I originally had tried omitting any NA values, however I opted to keep them in since most of the NA values were for missing city names or sale warnings so I would still be able to use the other columns which ultimately were more important to include.
+
+```{r}
+
+colnames(housing_data) <- c('Sale_Date', 'Sale_Price', 'Sale_Reason', 
+                            'Sale_Instrument', 'Sale_Warning', 'Site_Type', 
+                            'Full_Address', 'Zip_Code', 'City_Name', 
+                            'Postal_City', 'Longitude', 'Latitude', 
+                            'Building_Grade', 'Square_Feet_Living', 'Bedrooms', 
+                            'Full_Bathrooms', 'Half_Bathrooms', '3/4_Bathrooms', 
+                            'Year_Built', 'Year_Renovated', 'Current_Zoning', 
+                            'Square_Feet_Lot', 'Property_Type', 'Present_Use')
+summary(housing_data)
+
+```
+
+### 2. Create a linear regression model where “sq_ft_lot” predicts Sale Price.
+
+```{r}
+
+library(ggplot2)
+ggplot(housing_data, aes(x = Square_Feet_Lot, y = Sale_Price)) + geom_point() + 
+  geom_smooth(method = "lm") + labs(x = "Square Feet Lot", y = "Sale Price")
+
+```
+
+```{r}
+
+model1 <- lm(Sale_Price ~ Square_Feet_Lot, data = housing_data)
+model1
+
+```
+
+### 3. Get a summary of your first model and explain your results (i.e., R2, adj. R2, etc.)
+
+```{r}
+
+summary(model1)
+
+```
+
+When we get the summary of the first model, we can see the t-value is far away from 0 which could mean that some sort of relationship exists. The Pr(\>\|t\|) value has three asterisks by it which represent a highly significant p-value. The R squared statistic is 0.01435 or roughly 1.4% of the variance found in the response variable (Sale_Price) can be explained by the predictor variable (Square_Feet_Lot) which is a pretty weak value.
+
+### 4. Get the residuals of your model (you can use ‘resid’ or ‘residuals’ functions) and plot them. What the does the plot tell you about your predictions?
+
+```{r}
+
+res1 <- resid(model1)
+plot(res1)
+abline(0, 0)
+
+plot(fitted(model1), res1)
+abline(0, 0)
+
+```
+
+The residuals are, for the most part, randomly scattered around zero, suggesting that it is a good fit. There are more points plotted on the positive side so it may be that the predictions were either just right or too low. However, the numbers are very small so I am going to stick to the predictions being correct.
+
+### 5. Use a qq plot to observe your residuals. Do your residuals meet the normality assumption?
+
+```{r}
+
+qqnorm(res1)
+qqline(res1)
+plot(density(res1))
+
+```
+
+After using both a Q-Q plot and a density plot to determine normality, I believe that the residuals do meet the normality assumption.
+
+### 6. Now, create a linear regression model that uses multiple predictor variables to predict Sale Price (feel free to derive new predictors from existing ones). Explain why you think each of these variables may add explanatory value to the model.
+
+```{r}
+
+model2 <- lm(Sale_Price ~ Square_Feet_Lot + Bedrooms + Year_Built, 
+             data = housing_data)
+
+```
+
+I believe that the variables Bedrooms and Year_Built add explanatory value to the model since typically houses with more bedrooms would be higher in price as well as newer homes tend to be more expensive.
+
+### 7. Get a summary of your next model and explain your results.
+
+```{r}
+
+summary(model2)
+
+```
+
+When we get the summary of the second model, we can see that all the estimate coefficients prove a positive relationship with the sale price. The t-values are far from zero meaning it is less likely that they occurred by chance and more so due to a relationship. The Pr(\>\|t\|) value again has three asterisks representing a highly significant p-value.
+
+### 8. Get the residuals of your second model (you can use ‘resid’ or ‘residuals’ functions) and plot them. What the does the plot tell you about your predictions?
+
+```{r}
+
+res2 <- resid(model2)
+plot(res2)
+abline(0, 0)
+
+plot(fitted(model2), res2)
+abline(0, 0)
+
+```
+
+The residuals for model 2 are very similar to those of the first model. They still indicate a good fit as most points seem to be centralized around zero.
+
+### 9. Use a qq plot to observe your residuals. Do your residuals meet the normality assumption?
+
+```{r}
+
+qqnorm(res2)
+qqline(res2)
+plot(density(res2))
+
+```
+
+The Q-Q plot of the second model looks pretty similar to that of the first model. It does follow, for the most part, a normal distribution line. When plotting the density plot, we can see the bell-shaped distribution so I would claim that the residuals do meet the normality assumption.
+
+### 10. Compare the results (i.e., R2, adj R2, etc) between your first and second model. Does your new model show an improvement over the first? To confirm a ‘significant’ improvement between the second and first model, use ANOVA to compare them. What are the results?
+
+```{r}
+
+anova(model1, model2)
+
+```
+
+The new model does show an improvement over the first. By using ANOVA we are able to confirm this. It shows how the second model in comparison to the first yields a very small p-value (2.2e-16 - which is extremely close to being zero) which means that adding the bedroom and year built variables did lead to an improved fit over the first model.
+
+### 11. After observing both models (specifically, residual normality), provide your thoughts concerning whether the model is biased or not.
+
+```{r}
+
+mean(model1$residuals)
+mean(model2$residuals)
+
+```
+
+After observing both models as well as determining the mean of the residuals, I do not believe the models are biased. The models both met the normality assumption as well as their means were microscopically near zero.
+
+### 12. Another important aspect of regression tasks is determining the accuracy of your predictions. For this section, we will look at root mean square error (RMSE), a common accuracy metric for regression models.
+
+#### 1. Install the ‘Metrics’ package in R Studio
+
+```{r}
+
+library(Metrics)
+
+```
+
+#### 2. Using the first model, we will make predictions on the dataset using the predict function.
+
+```{r}
+
+preds1 <- predict(object = model1, newdata = housing_data)
+rmse1 <- rmse(actual = housing_data$Sale_Price, predicted = preds1)
+
+```
+
+#### 3. What is the RMSE for the first model?
+
+```{r}
+
+rmse1
+
+```
+
+#### 4. Perform the same task for the second model. Provide the RMSE for the second model.
+
+```{r}
+
+preds2 <- predict(object = model2, newdata = housing_data)
+rmse2 <- rmse(actual = housing_data$Sale_Price, predicted = preds2)
+rmse2
+
+```
+
+#### 5. Did the second model’s RMSE improve upon the first model? By how much?
+
+The second model's RMSE did improve upon the first model. It improved by 24,042.1.
